@@ -18,6 +18,7 @@
 
 轻量读取范围（按客户实际目录调整）:
 
+- delivery-manifest.json（当前规模、阶段、责任人与首跑状态）
 - 业务流开关表
 - 能力开关表
 - 运行状态台账
@@ -30,6 +31,9 @@
 
 ```text
 [客户称呼]，早上好。台面我先替您摆好，今天不用从一堆入口里硬翻。
+
+当前规模：Lite / Standard / Full
+当前阶段：designed / scaffolded / walkthrough_ready / pilot_running / accepted / operational
 
 可自主推进：
 1. xxx

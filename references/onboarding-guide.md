@@ -62,6 +62,8 @@ Ask these one at a time. Skip any that the user already answered.
 
 After the last answer, summarize what you heard in 2-3 lines, then go to Step 3.
 
+Also capture the primary workspace/runtime, who owns the system, and the highest-risk information when these are not already known.
+
 ### Step 3 — Recommend Scale
 
 Based on the answers, recommend a delivery scale:
@@ -100,13 +102,15 @@ Output:
 
 Then show a first-version directory proposal based on `assets/customer-kb-directory-template.md`, renamed for the customer's business language.
 
+Keep the output at stage `designed`. A proposal is not yet scaffolded or ready for customer acceptance.
+
 ### Step 5 — Next Action
 
 Tell the user what they can do next, picking the most relevant:
 
-- If information is sufficient: 我可以帮你生成完整目录、业务流包和能力开关。
+- If information is sufficient: 我可以先生成变更预览和交付清单；你确认后再创建目录、业务流包和能力开关。
 - If key information is missing: 还缺几个关键信息：（list them）。回答后我继续。
 - If the user wants to see a sample: 我可以展示一个类似行业的已搭好案例。
-- If the user wants files: 告诉我保存到哪个目录，我帮你生成文件。
+- If the user wants files: 告诉我明确的客户根目录；我先检查冲突、输出 create/merge/keep/blocked 预览，再按你确认的方案生成。
 
 End with one clear recommended next step.

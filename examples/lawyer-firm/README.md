@@ -9,6 +9,8 @@ created: 2026-06-20
 
 这是一个从空白根目录搭建的律师业务知识库样例。
 
+当前交付规模：`standard`。当前运行阶段：`walkthrough_ready`。这表示结构、权限、首跑样例和回退方案已准备好，但尚未经过真实客户验收。
+
 首版只跑通一条核心工作流：
 
 ```text
@@ -33,6 +35,7 @@ created: 2026-06-20
 ## 使用入口
 
 - AI 执行规则：`AGENTS.md` / `CLAUDE.md`
+- 交付清单与当前阶段：`delivery-manifest.json`
 - 今日待处理：`00_律所工作台/今日待处理.md`
 - 案件流程导航：`00_律所工作台/案件流程导航.md`
 - 新咨询记录：`02_客户咨询收件箱/新咨询记录卡.md`
@@ -43,3 +46,14 @@ created: 2026-06-20
 - 系统级 skill：`11_能力与工具/01_能力开关/系统级skill候选清单.md`
 - 项目级 skill：`11_能力与工具/01_能力开关/项目级skill清单.md`
 - skill 安装启用：`11_能力与工具/01_能力开关/skill安装与启用清单.md`
+- 首次走查记录：`11_能力与工具/07_验证记录/首次走查记录.md`
+
+## 校验
+
+在 `kb-foundry` skill 根目录运行：
+
+```bash
+python scripts/validate_customer_kb.py --root examples/lawyer-firm --manifest examples/lawyer-firm/delivery-manifest.json
+```
+
+校验通过只表示结构与治理契约一致，不代表真实律师客户已经验收。

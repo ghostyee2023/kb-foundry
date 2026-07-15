@@ -1,4 +1,6 @@
 interface:
   display_name: "知识铸造"
-  short_description: "按五维诊断为客户设计可运行的知识库操作系统。"
-  default_prompt: "帮我为一个客户从业务诊断开始，设计一套可运行的客户版知识库系统。"
+  short_description: "从业务诊断到验收回滚，安全交付可运行的客户知识库操作系统"
+  default_prompt: "Use $kb-foundry to diagnose this customer business and design the smallest governed knowledge-base delivery package with a manifest, validation, first-run evidence, and rollback."
+policy:
+  allow_implicit_invocation: true

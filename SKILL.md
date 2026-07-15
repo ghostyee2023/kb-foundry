@@ -1,154 +1,171 @@
 ---
 name: kb-foundry
-description: Build customer-facing knowledge-base operating systems from business diagnosis to directory architecture, workflow packages, capability switches, delivery materials, and iteration plans. This is not a generic wiki builder; use it when a user asks to create, design, configure, productize, or deliver a client/customer knowledge-base operating system, client workflow architecture, capability configuration, AI execution layer, or knowledge-base delivery package.
+description: "Design, scaffold, validate, and hand off customer-facing knowledge-base operating systems from business diagnosis through lifecycle mapping, workflow packages, capability switches, safe directory creation, AI execution rules, first-run evidence, rollback, training, and upgrades. Use when a user asks to create, configure, productize, audit, repair, or deliver a client/customer knowledge base, workflow operating system, AI-enabled delivery root, capability layer, or governed customer knowledge-base package."
 ---
 
 # KB Foundry
 
-Version: v1.0-beta.2
+Version: v1.0-beta.3
 
 ## Core Rule
 
-Do not copy OPC directory names directly into a customer project. Always translate from the customer's business model.
+Build from the customer's business, not from a favorite directory tree. A folder scaffold is not an operational system, and a simulated walkthrough is not customer acceptance.
 
-This skill is not a generic knowledge-base generator. It is for customer-facing knowledge-base operating systems where business workflows, capability switches, AI execution rules, handoff materials, and iteration evidence matter.
-
-Use this order every time:
+Use this order:
 
 ```text
-Five-dimensional diagnosis
+five-dimensional diagnosis
+-> scale and current stage
+-> customer-kb-delivery/v1 manifest
 -> lifecycle mapping
 -> workflow packages
 -> capability switches
--> directory placement
+-> customer-language directory placement
+-> change preview and snapshot
+-> safe scaffolding
+-> machine validation
 -> first workflow walkthrough
--> delivery and training
--> review and iteration
+-> runtime evidence and stage promotion
+-> handoff, training, rollback, and upgrade
 ```
 
-If the user provides only a vague customer need, first produce a diagnosis checklist and a minimal architecture draft. Do not create long-term customer assets until the target customer, business type, and delivery scope are clear.
+Do not copy OPC names, private context, internal paths, sync mechanics, or another customer's materials into the customer root.
 
-Before designing a full system, choose the delivery scale:
+## Modes
 
-- Lite: one or two core workflows, a small directory, no heavy capability registry unless needed.
-- Standard: workflow switchboard, capability switchboard, templates, and AI execution rules.
-- Full delivery: complete directory architecture, workflow packages, capability switches, project skill plan, training materials, and validation records.
+### Explore
 
-## First-Time Users
+Use when the customer, target root, or delivery scope is unclear. Ask one question at a time using `references/onboarding-guide.md`. Produce diagnosis, recommended scale, stage `designed`, first workflow, assumptions, and a directory proposal. Do not write files.
 
-When a user is trying the skill for the first time or gives a vague request without customer context, use `references/onboarding-guide.md` to run an interactive question flow. Ask one question at a time. Do not dump the full workflow on a new user. Adapt based on answers and stop early if the user only wants to explore.
+### Design
+
+Use when customer context is sufficient but the user has not authorized scaffolding. Produce the five dimensions, lifecycle, workflow/capability plan, `customer-kb-delivery/v1` draft, and create/merge/keep/blocked preview.
+
+### Scaffold
+
+Use only when the user explicitly asks to create, save, land, scaffold, or update files and names the target root. Read `references/safe-scaffolding.md`. Inspect only that root, protect existing files, require a snapshot for existing Standard/Full roots, and apply one coherent artifact group at a time.
+
+### Audit or Repair
+
+Use when a customer root already exists. Read the manifest, run `scripts/validate_customer_kb.py`, report evidence-backed failures, and propose a repair preview. Do not silently repair or promote stages unless the user asks.
 
 ## Workflow
 
-1. Classify the customer business.
-   Identify revenue model, delivery object, input sources, output assets, collaboration roles, operating rhythm, and risk boundaries.
+1. Confirm customer and authority.
+   Identify customer label, business type, target root, requested action, primary workspace/runtime, users, owners, risk boundaries, and whether writes are authorized.
 
-2. Choose the delivery scale.
-   Decide whether the customer needs Lite, Standard, or Full delivery. Small customers should not receive an over-engineered system by default.
+2. Run the five-dimensional diagnosis.
+   Read `references/five-dimensional-diagnosis.md`. Separate customer facts from assumptions. Diagnose context, assets, capabilities, workflows, and governance.
 
-3. Run the five-dimensional diagnosis.
-   Use `references/five-dimensional-diagnosis.md` when the customer business is unclear, cross-functional, or needs a formal diagnosis artifact.
+3. Choose scale and stage.
+   Read `references/scale-and-stage-gates.md`. Use the smallest of Lite, Standard, or Full that can close one real workflow. Record one of: `designed`, `scaffolded`, `walkthrough_ready`, `pilot_running`, `accepted`, or `operational`.
 
-4. Map the lifecycle.
-   Convert the customer's real business lifecycle into stages such as input, qualification, production, delivery, feedback, review, and asset reuse.
+4. Create the delivery contract.
+   Read `references/delivery-manifest-contract.md` and copy `assets/delivery-manifest.template.json`. Every saved root must have `delivery-manifest.json` using `customer-kb-delivery/v1`.
 
-5. Design workflow packages.
-   Each workflow package must include input, judgment, processing, output, review, sedimentation, and feedback loop. Use `references/workflow-package-template.md` for formal registration.
+5. Map the lifecycle and workflow packages.
+   Use `references/workflow-package-template.md`. Every active workflow needs input, judgment, processing, output, review, sedimentation, feedback, owner, first-run fixture, evidence path, human gates, fallback, and promotion criteria.
 
 6. Configure capability switches.
-   Treat skills, agents, CLIs, templates, automations, rules, and external tools as capabilities serving workflow nodes. Use `references/capability-switch-template.md`.
+   Use `references/capability-switch-template.md` and `assets/Capability_Switchboard.template.md`. Bind every skill, agent, CLI, rule, template, automation, or external tool to a workflow node. Define runtime, read/write scopes, dependencies, owner, human confirmation, fallback, evidence, close impact, and retirement condition.
 
-7. Generate the customer directory.
-   Use business-readable names. Keep top-level directories ordered by operating sequence. Use `assets/customer-kb-directory-template.md` as the starting scaffold, then rename for the customer's business. Include root AI execution files such as `AGENTS.md` and `CLAUDE.md` when the customer will use AI agents.
+7. Translate into customer-language directories.
+   Start from `assets/customer-kb-directory-template.md`, then remove, merge, rename, and reorder based on the diagnosed lifecycle. Lite must not inherit the full template by default.
 
-7b. Walk through the first workflow.
-   After the directory and AI execution rules are in place, guide the user through running their first real workflow end-to-end. Use `references/first-workflow-walkthrough.md`. The goal is not to generate more files, but to make sure the user understands how an input moves through the system: inbox -> judgment -> processing -> output -> review -> sedimentation. If the user is completely new, also run `references/first-day-checklist.md` to cover the five essential first-day actions.
+8. Configure the AI execution layer.
+   Add root rules only for the runtimes the customer uses. Keep `AGENTS.md` and `CLAUDE.md` byte-identical when both exist. Use the system-skill, project-skill, installation, workbench, and AI-boundary templates only when the selected scale requires them.
 
-8. Produce delivery materials.
-   For paid or client-facing work, output a setup plan, customer explanation, training path, and next iteration list.
+9. Preview and scaffold safely.
+   Follow `references/safe-scaffolding.md`. Mark every planned path as create, merge, keep, replace-with-approval, rename, conflict, or blocked. Never recursively overwrite a customer root.
 
-9. Configure customer AI execution.
-   Add root rules, workflow switches, capability switches, system skill candidate list, project skill registry, skill installation plan, AI boundaries, and validation records. Use the capability layer templates to generate initial content for the customer: `assets/Capability_Switchboard.template.md`, `assets/System_Skill_Candidates.template.md`, `assets/Project_Skill_Registry.template.md`, and `assets/Skill_Install_And_Enablement.template.md`. Fill placeholder sections based on the customer industry and enabled workflows. These four files are the engine of the knowledge base; a customer root without them is a directory without capabilities. Customer AI must know what it can read, write, call, install, and when to stop for human confirmation.
+10. Validate the customer root.
+    Run:
 
-   Distinguish system-level skills from project-level skills:
-   - System-level skills are reusable capabilities already available on the delivery machine. Give customers a curated install list so their AI can install or request installation.
-   - Project-level skills are business-specific to the customer. They can be extracted from OPC and rewritten internally, created as later custom skills, or taught to the customer. Do not expose the internal sync mechanism in the customer root.
+    ```bash
+    python scripts/validate_customer_kb.py --root <customer-root> --manifest <customer-root>/delivery-manifest.json
+    ```
 
-10. Record review signals.
-   End every implementation with usage blockers, missing inputs, capabilities to add, and productization opportunities.
+    Fix or report missing artifacts, path traversal, broken workflow/capability references, blocked required capabilities, mismatched agent rules, missing evidence, and internal information leaks. The validator is read-only.
 
-11. Validate before handoff.
-   Use `references/acceptance-checklist.md` before calling a customer root complete. Customer roots must not expose OPC sync mechanics or internal paths.
+11. Prepare and run the first workflow.
+    Use `references/first-workflow-walkthrough.md` and `references/first-day-checklist.md`. Use a real or approved representative input, record human confirmation points, expected output, actual output, blockers, and fallback.
 
-## Output Modes
+12. Record evidence and promote honestly.
+    Read `references/evidence-and-upgrade.md` and copy `assets/validation-record.template.md`. Promote one stage at a time. `accepted` and `operational` require a passing first run and recorded evidence.
 
-Use a lightweight output when the user is exploring:
+13. Hand off and train.
+    Use `references/acceptance-checklist.md`. Deliver current stage, scale, manifest, validator result, owners, first-run status, known blockers, rollback steps, training path, and evidence-based upgrade triggers.
 
-- customer diagnosis summary
-- recommended knowledge-base shape
-- first-version directory proposal
-- missing information list
-- recommended delivery scale
+## Scale Rules
 
-Use a full delivery output when the user asks to build, land, save, scaffold, or prepare a customer package:
+- Lite: one workflow, minimal directories, capability switchboard, first-run fixture, and validation records.
+- Standard: Lite plus controlled skill/capability growth, AI boundaries, install plan, ownership, upgrade log, and snapshot.
+- Full: Standard plus formal diagnosis, lifecycle map, workflow packages, training, handoff, rollback, and acceptance evidence.
 
-- customer diagnosis
-- lifecycle map
-- workflow package list
-- capability switch list
-- directory tree
-- AI execution rules
-- system skill candidate list
-- key templates
-- project skill and installation plan
-- training and handoff plan
-- review and upgrade checklist
-
-## Validation Status
-
-This is a beta skill. Be explicit about validation state in customer-facing or contest-facing outputs:
-
-- Validated: methodology design, reference templates, internal structure, simulated customer scenarios, first-workflow walkthrough, first-day onboarding, and capability layer templates (switchboard, system skill candidates, project skill registry, install guide).
-- Pending: real customer end-to-end delivery evidence across multiple industries.
-- Known risk: full delivery may feel heavy for small customers; use Lite or Standard scale first.
-- Known risk: platform or public API availability may vary after installation; provide fallback instructions and manual usage paths.
-
-## Boundaries
-
-- Preserve customer confidentiality. Do not expose OPC internal paths, internal customer names, private business details, or unpublished strategy unless the user explicitly wants an internal artifact.
-- Do not write files by default. Write only when the user asks to save, scaffold, land, generate files, or create a deliverable.
-- For OPC productization assets, write under `12_客户版知识库产品/` or related delivery paths. For reusable capability records, write under `11_能力与Agent/`.
-- If the customer needs an automation, first register the workflow node and capability switch. Do not bolt automation directly onto a folder.
-- If the customer needs AI agents, add root execution rules and project skill configuration before enabling any skill or automation.
-- If the customer needs skills, first separate system-level skills from project-level skills. Do not mix installable tool skills with customer business skills.
-- For customer-side project skills, use customer-facing labels such as `delivered`, `custom`, and `training` in one project skill registry. Keep internal sync details in OPC-side governance, not the customer root.
-- If a customer business does not need the full system, recommend a smaller version.
-- If installation, public API access, or runtime availability is uncertain, state the uncertainty and provide a manual fallback instead of claiming full automation.
+Do not choose Full because the customer is important. Choose it only when workflow, risk, roles, and delivery evidence require it.
 
 ## Runtime Assets
 
-From v1.0-beta.2, the skill ships with usable runtime assets, not just design templates:
+- `assets/scripts/hybrid_search.py`: zero-dependency Chinese/English local search with hidden-directory exclusions and self-test.
+- `scripts/validate_customer_kb.py`: read-only delivery manifest, cross-reference, stage, path, and clean-surface validator.
+- `examples/lawyer-firm/`: Standard professional-service reference at stage `walkthrough_ready`; it is not represented as real customer acceptance.
 
-- `assets/workbench-template.md`: copy into the customer root as the daily entry point. Rename and adapt quick commands to the customer business.
-- `assets/scripts/hybrid_search.py`: zero-dependency local search. Copy into the customer root and run `python hybrid_search.py "keyword" --root .`. Works for mixed Chinese and English content.
-- `examples/lawyer-firm/`: a complete end-to-end customer root sample. Use as a reference for what a finished delivery looks like.
+Run runtime self-tests with:
 
-These assets let a customer start using the knowledge base on day one: search the vault, see what to do today, and learn from a real example.
+```bash
+python assets/scripts/hybrid_search.py --self-test
+python scripts/validate_customer_kb.py --self-test
+```
+
+## Output
+
+For exploration, return:
+
+- customer facts and assumptions
+- five-dimensional diagnosis
+- recommended scale and current stage
+- first workflow and required capabilities
+- customer-language directory proposal
+- missing information and next decision
+
+For a saved delivery, additionally return:
+
+- `delivery-manifest.json`
+- change preview and snapshot/rollback plan
+- created/merged/kept/blocked path report
+- validator result
+- first-run fixture and record
+- ownership, training, handoff, and upgrade conditions
+
+## Boundaries
+
+- Preserve customer confidentiality and data minimization.
+- Do not write by default; require explicit file-generation authority and a named target root.
+- Scaffolding authority does not authorize skill installation, external sync, API setup, publishing, messaging, or customer-facing delivery.
+- Do not replace existing root rules, customer context, governance, or high-value assets without explicit approval and rollback.
+- Do not enable automation before registering its workflow node, capability switch, scopes, human gate, fallback, and evidence plan.
+- Do not expose the delivery machine's full skill catalog; curate only customer-relevant system skills.
+- Do not claim `accepted` or `operational` from structure, templates, or simulated runs.
+- When runtime or platform availability is uncertain, mark the capability blocked/manual and provide a human fallback.
 
 ## References
 
-- `references/five-dimensional-diagnosis.md`: use for customer diagnosis and business model translation.
-- `references/workflow-package-template.md`: use when designing formal customer workflow packages.
-- `references/capability-switch-template.md`: use when configuring skills, tools, agents, templates, and automations.
-- `references/acceptance-checklist.md`: use before handoff or after scaffolding a customer root.
-- `references/first-workflow-walkthrough.md`: use after directory generation to guide the user through running their first workflow end-to-end.
-- `references/first-day-checklist.md`: use when the user is ready to start using the knowledge base, covering the five essential first-day actions.
-- `assets/customer-kb-directory-template.md`: use as a scaffold for a customer knowledge-base directory.
-- `assets/Capability_Switchboard.template.md`: use as starting content for the customer capability switchboard. Fill `{{CAPABILITIES}}` per workflow node.
-- `assets/System_Skill_Candidates.template.md`: use as starting content for the customer system skill candidate list. Fill `{{INDUSTRY_SKILLS}}` per customer industry.
-- `assets/Project_Skill_Registry.template.md`: use as starting content for the customer project skill registry. Fill `{{PROJECT_SKILLS}}` per workflow node.
-- `assets/Skill_Install_And_Enablement.template.md`: use as starting content for the customer skill installation and enablement guide. Fill `{{AI_TOOL}}` and `{{MINIMAL_SKILLS}}` per customer environment.
-- `references/onboarding-guide.md`: use when a user is trying the skill for the first time or needs guided onboarding.
-- `assets/workbench-template.md`: use as the starting point for a customer daily workbench. Adapt the section names and quick commands to the customer business.
-- `assets/scripts/hybrid_search.py`: zero-dependency local search. Copy into the customer root and run python hybrid_search.py "keyword" --root .. Works for mixed Chinese and English content.
-- `examples/lawyer-firm/`: a complete end-to-end customer root sample. Use as a reference for what a finished delivery looks like, or as a starting point for similar professional-service customers.
+- `references/onboarding-guide.md`: read for first-time or vague requests.
+- `references/five-dimensional-diagnosis.md`: read before architecture design.
+- `references/scale-and-stage-gates.md`: read to choose delivery scale and runtime stage.
+- `references/delivery-manifest-contract.md`: read for `customer-kb-delivery/v1`.
+- `references/workflow-package-template.md`: read for formal workflow packages.
+- `references/capability-switch-template.md`: read for capability registration.
+- `references/safe-scaffolding.md`: read before creating or changing a customer root.
+- `references/first-workflow-walkthrough.md`: read before the first workflow run.
+- `references/first-day-checklist.md`: read for day-one onboarding.
+- `references/evidence-and-upgrade.md`: read for validation evidence and promotion.
+- `references/acceptance-checklist.md`: read before handoff or completion claims.
+- `assets/delivery-manifest.template.json`: copy for every saved customer root.
+- `assets/validation-record.template.md`: copy for first runs and capability tests.
+- `assets/customer-kb-directory-template.md`: adapt; never copy blindly.
+- `assets/workbench-template.md`: adapt for the daily entry point.
+- `assets/Capability_Switchboard.template.md`: adapt for workflow-bound capabilities.
+- `assets/System_Skill_Candidates.template.md`: use for Standard/Full curated system skills.
+- `assets/Project_Skill_Registry.template.md`: use for customer-specific skills.
+- `assets/Skill_Install_And_Enablement.template.md`: use for controlled installation and rollback.

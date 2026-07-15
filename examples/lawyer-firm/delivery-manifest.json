@@ -1,0 +1,200 @@
+{
+  "schema_version": "customer-kb-delivery/v1",
+  "project_id": "lawyer-firm-reference",
+  "customer_label": "律师客户知识库样例",
+  "business_type": "consulting",
+  "delivery_scale": "standard",
+  "stage": "walkthrough_ready",
+  "root_path": ".",
+  "business_goal": "让律师或小型律师团队把一条新咨询安全地推进到受控的案件判断与交付流程",
+  "success_criteria": [
+    "用户能用一个代表性咨询完成收件、冲突检查、风险初筛和下一步路由",
+    "所有法律判断、报价和对外发送均停在律师人工确认点",
+    "运行卡点和能力验证能够落入声明的验证记录目录"
+  ],
+  "platform": {
+    "primary_workspace": "本地 Markdown / Obsidian",
+    "ai_runtimes": ["Codex", "Claude"],
+    "python_available": true,
+    "external_integrations": []
+  },
+  "artifacts": {
+    "root_readme": "README.md",
+    "agent_rules": ["AGENTS.md", "CLAUDE.md"],
+    "workbench": "00_律所工作台/今日待处理.md",
+    "path_register": "00_律所工作台/路径注册表.md",
+    "workflow_switchboard": "10_治理规则/业务流开关表.md",
+    "capability_switchboard": "11_能力与工具/01_能力开关/能力开关表.md",
+    "validation_records_dir": "11_能力与工具/07_验证记录",
+    "system_skill_candidates": "11_能力与工具/01_能力开关/系统级skill候选清单.md",
+    "project_skill_registry": "11_能力与工具/01_能力开关/项目级skill清单.md",
+    "skill_install_plan": "11_能力与工具/01_能力开关/skill安装与启用清单.md",
+    "ai_boundary": "11_能力与工具/04_AI辅助边界/AI辅助边界.md",
+    "upgrade_log": "09_律师复盘/04_模板升级记录"
+  },
+  "directories": [
+    "00_律所工作台",
+    "01_业务与专业上下文",
+    "02_客户咨询收件箱",
+    "03_法律知识与案例资产",
+    "04_案件判断与方案",
+    "05_文书与工作底稿",
+    "06_案件交付",
+    "07_客户交付与归档",
+    "08_数据反馈",
+    "09_律师复盘",
+    "10_治理规则",
+    "11_能力与工具"
+  ],
+  "risk_boundaries": [
+    {
+      "risk": "AI 生成或发送未经律师确认的法律判断与客户材料",
+      "protected_scope": "法律意见、代理方案、报价、对外发送和结案归档",
+      "human_gate": "执业律师逐项确认后才能进入下一节点或对外发送",
+      "fallback": "只整理事实、待补材料和草稿，并标记状态为待律师确认"
+    },
+    {
+      "risk": "客户身份、对方主体和证据材料进入公共案例资产",
+      "protected_scope": "客户咨询、原始证据、合同原件、聊天与付款记录",
+      "human_gate": "律师确认脱敏范围与复用目的",
+      "fallback": "保留在受控案件目录，只沉淀匿名方法和模板"
+    }
+  ],
+  "workflows": [
+    {
+      "flow_id": "lawyer_case_delivery_flow",
+      "name": "客户咨询到案件交付闭环",
+      "status": "experimental",
+      "owner": "主办律师",
+      "entry_points": ["新客户咨询", "客户提交案件材料"],
+      "lifecycle": {
+        "input": "记录咨询来源、客户主体、对方主体和待补信息",
+        "judgment": "律师完成冲突检查与风险初筛",
+        "processing": "开展案情访谈、整理证据目录和代理方案草稿",
+        "output": "形成经律师确认的阶段方案、文书或客户进度材料",
+        "review": "律师审核专业判断、报价、对外内容和归档范围",
+        "sedimentation": "抽取匿名方法、模板和可复用问答",
+        "feedback": "记录案件结果、客户反馈、服务耗时和单案复盘"
+      },
+      "main_directory": "06_案件交付",
+      "read_scope": [
+        "02_客户咨询收件箱",
+        "03_法律知识与案例资产",
+        "04_案件判断与方案",
+        "05_文书与工作底稿"
+      ],
+      "write_scope": [
+        "04_案件判断与方案",
+        "05_文书与工作底稿",
+        "06_案件交付",
+        "07_客户交付与归档",
+        "09_律师复盘"
+      ],
+      "required_capabilities": [
+        "confidentiality_governance",
+        "conflict_check",
+        "evidence_catalog_builder",
+        "legal_work_product_template"
+      ],
+      "human_confirmation_points": ["冲突检查结论", "是否接案", "专业判断与报价", "对外发送与归档"],
+      "promotion_gate": "至少完成一次真实咨询闭环、主办律师复核通过且运行记录无未回退的高风险 blocker",
+      "acceptance_criteria": [
+        "一个代表性咨询能够完成冲突检查并停在律师确认点",
+        "产物路径、使用能力和待律师确认事项可被用户说清楚"
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "capability_id": "confidentiality_governance",
+      "name": "保密与权限治理",
+      "status": "core",
+      "owner": "负责律师或合伙人",
+      "served_workflows": ["lawyer_case_delivery_flow"],
+      "served_nodes": ["input", "processing", "output", "sedimentation"],
+      "read_scope": ["02_客户咨询收件箱", "10_治理规则"],
+      "write_scope": ["10_治理规则/04_运行证据"],
+      "dependencies": [],
+      "fallback": "停止 AI 处理并由律师在受控目录人工处理",
+      "human_confirmation": "律师确认任何脱敏、复用和对外发送范围",
+      "acceptance_criteria": ["敏感材料不进入公共案例资产"],
+      "validation_evidence": []
+    },
+    {
+      "capability_id": "conflict_check",
+      "name": "冲突检查",
+      "status": "core",
+      "owner": "主办律师",
+      "served_workflows": ["lawyer_case_delivery_flow"],
+      "served_nodes": ["judgment"],
+      "read_scope": ["02_客户咨询收件箱", "04_案件判断与方案/01_冲突检查"],
+      "write_scope": ["04_案件判断与方案/01_冲突检查"],
+      "dependencies": ["confidentiality_governance"],
+      "fallback": "律师按冲突检查表人工核对主体与关联关系",
+      "human_confirmation": "律师确认是否存在冲突以及是否继续接案",
+      "acceptance_criteria": ["未完成冲突检查时不能进入代理方案"],
+      "validation_evidence": []
+    },
+    {
+      "capability_id": "evidence_catalog_builder",
+      "name": "证据目录整理",
+      "status": "manual",
+      "owner": "主办律师",
+      "served_workflows": ["lawyer_case_delivery_flow"],
+      "served_nodes": ["processing"],
+      "read_scope": ["02_客户咨询收件箱/03_客户材料", "05_文书与工作底稿/03_证据目录"],
+      "write_scope": ["05_文书与工作底稿/03_证据目录"],
+      "dependencies": ["confidentiality_governance", "conflict_check"],
+      "fallback": "律师使用证据目录模板人工整理并标注待补材料",
+      "human_confirmation": "律师确认证据关联性、证明目的和缺口",
+      "acceptance_criteria": ["目录不编造证据且能追溯到客户材料"],
+      "validation_evidence": []
+    },
+    {
+      "capability_id": "legal_work_product_template",
+      "name": "法律工作产品模板",
+      "status": "manual",
+      "owner": "主办律师",
+      "served_workflows": ["lawyer_case_delivery_flow"],
+      "served_nodes": ["processing", "output", "review"],
+      "read_scope": ["04_案件判断与方案", "05_文书与工作底稿"],
+      "write_scope": ["05_文书与工作底稿", "06_案件交付"],
+      "dependencies": ["confidentiality_governance", "conflict_check"],
+      "fallback": "律师使用获批模板人工起草",
+      "human_confirmation": "律师确认专业判断、报价和最终对外版本",
+      "acceptance_criteria": ["所有对外材料保持待律师确认状态直到批准"],
+      "validation_evidence": []
+    }
+  ],
+  "first_run": {
+    "workflow_id": "lawyer_case_delivery_flow",
+    "fixture_path": "02_客户咨询收件箱/新咨询记录卡.md",
+    "expected_output_path": "04_案件判断与方案/01_冲突检查/冲突检查表.md",
+    "record_path": "11_能力与工具/07_验证记录/首次走查记录.md",
+    "status": "ready",
+    "human_confirmation_points": ["客户与对方主体确认", "冲突检查结论", "是否继续接案"],
+    "acceptance_criteria": [
+      "用户能把代表性咨询放入正确入口",
+      "冲突检查未确认前流程不会进入代理方案",
+      "走查结果和卡点写入首次走查记录"
+    ]
+  },
+  "validation_evidence": [],
+  "rollback": {
+    "snapshot_required": true,
+    "snapshot_location": ".kb-foundry-backups/before-first-run",
+    "change_log": "09_律师复盘/04_模板升级记录",
+    "restore_steps": [
+      "把 lawyer_case_delivery_flow 改回 paused 或 experimental",
+      "把可选能力改回 manual 或 blocked",
+      "从经确认的快照恢复被修改的根规则和模板",
+      "保留客户原始材料、运行证据和失败记录"
+    ]
+  },
+  "ownership": {
+    "business_owner": "主办律师",
+    "system_maintainer": "律所知识库维护人",
+    "rule_approver": "负责律师或合伙人",
+    "review_cadence": "每月及每次结案后"
+  }
+}

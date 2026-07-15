@@ -1,58 +1,65 @@
 # Five-Dimensional Diagnosis
 
-Use this reference when translating a customer's business into a knowledge-base operating system.
+Translate the customer's business into five dimensions before naming directories or choosing tools.
 
-## Diagnosis Dimensions
+## 1. Context
 
-1. Strategy context
-   - What does the customer sell?
-   - Who pays?
-   - What result is promised?
-   - What information must never be lost?
+- What does the customer sell, to whom, and for what promised result?
+- Who uses, owns, maintains, and approves the system?
+- What is the first operating outcome and how will it be observed?
+- What is explicitly outside the first version?
 
-2. Input system
-   - Where do raw materials come from?
-   - Which inputs are temporary, reusable, confidential, or customer-facing?
-   - Which inputs arrive repeatedly?
+## 2. Assets
 
-3. Production system
-   - What work turns input into output?
-   - Which steps require human judgment?
-   - Which steps can be templated, assisted, or automated?
+- What source materials, records, templates, cases, data, and systems already exist?
+- Which assets are temporary, reusable, customer-facing, confidential, or regulated?
+- Where are they now, who owns them, and which may the AI read or write?
+- Which formats, volumes, duplication, and quality problems affect migration?
 
-4. Delivery and distribution
-   - What is delivered to users, clients, students, partners, or internal teams?
-   - What proof of delivery must be retained?
-   - Which materials become reusable assets?
+## 3. Capabilities
 
-5. Feedback and governance
-   - What data or feedback proves whether the system is working?
-   - What needs review, upgrade, access control, or archival?
-   - Who owns rules, templates, and exceptions?
+- Which business actions must be performed at each workflow node?
+- Which actions are manual, templated, AI-assisted, automated, blocked, or unnecessary?
+- What runtime, permissions, dependencies, fallback, and human confirmation does each capability need?
+- What evidence would justify promoting a capability from manual/experimental to on?
 
-## Customer Type Mapping
+## 4. Workflows
 
-For content/IP businesses, emphasize topic selection, content production, publishing, feedback, and reusable methods.
+- Which real trigger starts the work?
+- How does input move through judgment, processing, output, review, sedimentation, and feedback?
+- Which role owns each decision and handoff?
+- Can the workflow close independently, and what real first-run fixture will prove it?
 
-For consulting/service businesses, emphasize diagnosis, proposal, delivery SOP, case records, client feedback, and reusable solution modules.
+## 5. Governance
 
-For course/training businesses, emphasize curriculum, lesson assets, student input, teaching delivery, Q&A reuse, and cohort review.
+- What must never be automated, exposed, overwritten, or sent externally?
+- How are workflow/capability states, run evidence, blockers, changes, and rollback recorded?
+- Who approves rules, high-risk actions, and stage promotion?
+- What review cadence and retirement conditions keep the system maintainable?
 
-For internal team knowledge bases, emphasize role workflows, decision records, SOPs, project documents, handoff, and governance.
+## Scale Recommendation
 
-For AI transformation projects, emphasize use-case discovery, workflow redesign, capability configuration, tool adoption, training, and iteration evidence.
+After diagnosis, choose Lite, Standard, or Full using `scale-and-stage-gates.md`. Recommend the smallest profile that can run one real workflow. Do not equate customer size with complexity; use workflow count, risk, roles, and governance needs.
 
 ## Minimal Diagnosis Output
 
-```text
-Customer:
-Business type:
-Revenue model:
-Core workflow:
-Primary inputs:
-Primary outputs:
-Reusable assets:
-High-risk information:
-Missing dimensions:
-Recommended first-version scope:
+```yaml
+customer_label:
+business_type:
+business_goal:
+success_criteria:
+users_and_owners:
+current_assets:
+high_risk_assets:
+core_workflow:
+required_capabilities:
+human_confirmation_points:
+platform_and_runtime:
+missing_inputs:
+recommended_scale: lite | standard | full
+recommended_stage: designed
+first_run_fixture:
+explicit_non_goals:
 ```
+
+Every diagnosis must show which statements came from the customer and which remain assumptions.

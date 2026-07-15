@@ -4,6 +4,7 @@ Use this checklist before considering a customer knowledge-base root deliverable
 
 ## Required Root Files
 
+- `delivery-manifest.json` exists and uses `customer-kb-delivery/v1`.
 - `README.md` explains the customer knowledge base in customer-facing language.
 - `AGENTS.md` exists when Codex-style agents will work in the root.
 - `CLAUDE.md` exists when Claude-style agents will work in the root.
@@ -18,6 +19,8 @@ Use this checklist before considering a customer knowledge-base root deliverable
 - Skill installation and enablement list exists when any skill needs installation, validation, or activation.
 - AI boundary or execution rules exist for sensitive domains.
 - Validation records directory exists for first-run evidence.
+- Delivery scale and runtime stage match the evidence in the manifest.
+- Rollback strategy and named ownership exist at the level required by the selected scale.
 
 ## Clean Customer Surface
 
@@ -88,6 +91,17 @@ Before handoff, produce or verify:
 - Skill install/enablement notes.
 - Human confirmation points.
 - Known blockers and next upgrade list.
+- Delivery manifest, validator result, rollback instructions, and current runtime stage.
+
+## Machine Validation
+
+Before handoff, run:
+
+```bash
+python scripts/validate_customer_kb.py --root <customer-root> --manifest <customer-root>/delivery-manifest.json
+```
+
+Do not report `accepted` or `operational` when validation fails. `accepted` and `operational` also require a passing first-run record and validation evidence.
 
 ## Final Acceptance Output
 
@@ -100,4 +114,8 @@ Active workflow:
 Enabled mechanisms:
 Pending decisions:
 Validation performed:
+Delivery scale:
+Runtime stage:
+Manifest:
+Rollback:
 ```

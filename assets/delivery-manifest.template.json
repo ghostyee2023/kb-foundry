@@ -1,0 +1,44 @@
+{
+  "schema_version": "customer-kb-delivery/v1",
+  "project_id": "{{PROJECT_ID}}",
+  "customer_label": "{{CUSTOMER_LABEL}}",
+  "business_type": "other",
+  "delivery_scale": "lite",
+  "stage": "designed",
+  "root_path": ".",
+  "business_goal": "{{BUSINESS_GOAL}}",
+  "success_criteria": ["{{SUCCESS_CRITERION}}"],
+  "platform": {
+    "primary_workspace": "{{PRIMARY_WORKSPACE}}",
+    "ai_runtimes": ["{{AI_RUNTIME}}"],
+    "python_available": false,
+    "external_integrations": []
+  },
+  "artifacts": {
+    "root_readme": "README.md",
+    "agent_rules": ["AGENTS.md", "CLAUDE.md"],
+    "workbench": "{{WORKBENCH_PATH}}",
+    "path_register": "{{PATH_REGISTER_PATH}}",
+    "workflow_switchboard": "{{WORKFLOW_SWITCHBOARD_PATH}}",
+    "capability_switchboard": "{{CAPABILITY_SWITCHBOARD_PATH}}",
+    "validation_records_dir": "{{VALIDATION_RECORDS_DIR}}"
+  },
+  "directories": [],
+  "risk_boundaries": [],
+  "workflows": [],
+  "capabilities": [],
+  "first_run": {},
+  "validation_evidence": [],
+  "rollback": {
+    "snapshot_required": false,
+    "snapshot_location": "not_applicable_new_root",
+    "change_log": "{{CHANGE_LOG_PATH}}",
+    "restore_steps": ["Disable newly added workflows and restore reviewed files"]
+  },
+  "ownership": {
+    "business_owner": "{{BUSINESS_OWNER}}",
+    "system_maintainer": "{{SYSTEM_MAINTAINER}}",
+    "rule_approver": "{{RULE_APPROVER}}",
+    "review_cadence": "monthly"
+  }
+}

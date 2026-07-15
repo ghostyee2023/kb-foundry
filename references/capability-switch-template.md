@@ -22,8 +22,11 @@ output_type:
 read_scope:
 write_scope:
 dependencies:
+owner:
+human_confirmation:
 fallback:
 acceptance_criteria:
+validation_evidence:
 shutdown_impact:
 retirement_condition:
 ```
@@ -50,3 +53,5 @@ retirement_condition:
 - A blocked capability cannot be required by an active workflow.
 - An automation is a capability, not a shortcut around workflow design.
 - A template is also a capability when it controls repeated output.
+- A capability cannot move from `manual` or `experimental` to `on` without validation evidence from its served workflow node.
+- Every blocked capability needs a usable human fallback.

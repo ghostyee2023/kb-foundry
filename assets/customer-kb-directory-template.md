@@ -5,6 +5,7 @@ Rename these directories for the customer's business language. Keep the operatin
 ```text
 AGENTS.md
 CLAUDE.md
+delivery-manifest.json
 
 00_System_Entry/
   README.md
@@ -92,7 +93,9 @@ CLAUDE.md
 
 ## Scaling Rules
 
-- For a small customer, merge `04_Decision_And_Planning` into `01_Business_Context` and merge `07_Distribution_Or_Handoff` into `06_Delivery`.
+- Use `references/scale-and-stage-gates.md` before choosing directories.
+- For a Lite customer, keep only the business context, one inbox, one core workflow's production/delivery paths, feedback/review, governance, capability switchboard, and validation records. Do not scaffold every directory above.
+- For a small customer, merge `04_Decision_And_Planning` into `01_Business_Context` and merge `07_Distribution_Or_Handoff` into `06_Delivery` when those stages are still needed.
 - For a content business, keep `04`, `05`, `07`, and `08` separate.
 - For a consulting business, keep `06_Delivery` and `08_Feedback_Data` separate.
 - For a team knowledge base, add role-based indexes under `00_System_Entry`.
@@ -123,7 +126,9 @@ When generating the `11_Capabilities_And_Agents/` directory for a customer, use 
 - `Project_Skill_Registry.md`: use `assets/Project_Skill_Registry.template.md`. Fill `{{PROJECT_SKILLS}}` with planned project-level skills for each workflow node.
 - `Skill_Install_And_Enablement.md`: use `assets/Skill_Install_And_Enablement.template.md`. Fill `{{AI_TOOL}}` and `{{MINIMAL_SKILLS}}` based on customer environment.
 
-These four files are not optional. A customer knowledge base without them is a directory without an engine. They tell the customer what capabilities are available, what is missing, how to install, and how to verify.
+For Standard and Full delivery, these four files are required. Lite requires the capability switchboard but may defer the system-skill, project-skill, and installation files until evidence shows they are needed.
+
+Every saved customer root also requires `delivery-manifest.json`, created from `assets/delivery-manifest.template.json`. The manifest is the machine-readable contract for paths, workflows, capabilities, first-run evidence, ownership, and rollback.
 
 ## Skill Layering
 
